@@ -18,18 +18,18 @@ export default function Circle() {
 
       try {
         const { data: curUser } = await axios.get(
-          `http://localhost:5000/api/user/${user.uid}`
+          `https://backmeup-complete-1.onrender.com/api/user/${user.uid}`
         );
         const { data: myLogsData } = await axios.get(
-          `http://localhost:5000/api/logs/${user.uid}`
+          `https://backmeup-complete-1.onrender.com/api/logs/${user.uid}`
         );
         setMyLogs(myLogsData);
 
         const partnerData = await Promise.all(
           (curUser.matchedWith || []).map(async (uid) => {
             const [uRes, lRes] = await Promise.all([
-              axios.get(`http://localhost:5000/api/user/${uid}`),
-              axios.get(`http://localhost:5000/api/logs/${uid}`)
+              axios.get(`https://backmeup-complete-1.onrender.com/api/user/${uid}`),
+              axios.get(`https://backmeup-complete-1.onrender.com/api/logs/${uid}`)
             ]);
             return {
               name: uRes.data.name,
@@ -52,7 +52,7 @@ export default function Circle() {
   /* ───────────────────────── REACTIONS ───────────────────────── */
   const handleReaction = async (logId, emoji) => {
     try {
-      await axios.post("http://localhost:5000/api/react", {
+      await axios.post("https://backmeup-complete-1.onrender.com/api/react", {
         logId,
         uid: userUid,
         emoji
@@ -60,7 +60,7 @@ export default function Circle() {
 
       // refresh my logs
       const { data: updatedMyLogs } = await axios.get(
-        `http://localhost:5000/api/logs/${userUid}`
+        `https://backmeup-complete-1.onrender.com/api/logs/${userUid}`
       );
       setMyLogs(updatedMyLogs);
 
@@ -68,7 +68,7 @@ export default function Circle() {
       const refreshed = await Promise.all(
         partners.map(async (p) => {
           const { data: updatedLogs } = await axios.get(
-            `http://localhost:5000/api/logs/${p.uid}`
+            `https://backmeup-complete-1.onrender.com/api/logs/${p.uid}`
           );
           return { ...p, logs: updatedLogs };
         })

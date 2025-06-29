@@ -23,13 +23,13 @@ export default function Match() {
       try {
         // If not passed via navigation, fetch from backend
         if (!currentUser) {
-          const userRes = await axios.get(`http://localhost:5000/api/user/${user.uid}`);
+          const userRes = await axios.get(`https://backmeup-complete-1.onrender.com/api/user/${user.uid}`);
           currentUser = userRes.data;
         }
 
         setGoal(currentUser.goal);
 
-        const matchRes = await axios.get(`http://localhost:5000/api/match/${user.uid}`);
+        const matchRes = await axios.get(`https://backmeup-complete-1.onrender.com/api/match/${user.uid}`);
         setSuggestedUsers(matchRes.data);
       } catch (err) {
         console.error(err);
@@ -45,7 +45,7 @@ export default function Match() {
     if (!user) return alert("User not logged in");
 
     try {
-      await axios.post("http://localhost:5000/api/request-partner", {
+      await axios.post("https://backmeup-complete-1.onrender.com/api/request-partner", {
         fromUid: user.uid,
         toUid: partnerUid,
       });

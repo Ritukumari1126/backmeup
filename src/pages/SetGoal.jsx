@@ -16,13 +16,13 @@ export default function SetGoal() {
 
     try {
       // 1. Save goal to backend
-      await axios.post("http://localhost:5000/api/set-goal", {
+      await axios.post("https://backmeup-complete-1.onrender.com/api/set-goal", {
         uid: user.uid,
         goal,
       });
 
       // 2. Fetch updated user
-      const res = await axios.get(`http://localhost:5000/api/user/${user.uid}`);
+      const res = await axios.get(`https://backmeup-complete-1.onrender.com/api/user/${user.uid}`);
       const updatedUser = res.data;
 
       // 3. Navigate to match with updated goal

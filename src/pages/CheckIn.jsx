@@ -19,7 +19,7 @@ export default function CheckIn() {
       if (!user) return;
 
       try {
-        const res = await axios.get(`http://localhost:5000/api/logs/${user.uid}`);
+        const res = await axios.get(`https://backmeup-complete-1.onrender.com/api/logs/${user.uid}`);
         setLog(res.data);
 
         const isAlreadyChecked = res.data.some(entry => entry.date === today);
@@ -38,7 +38,7 @@ export default function CheckIn() {
     if (!user) return;
 
     try {
-      await axios.post("http://localhost:5000/api/checkin", {
+      await axios.post("https://backmeup-complete-1.onrender.com/api/checkin", {
         uid: user.uid,
         note: note
         // Do NOT send `date` — let backend set it correctly

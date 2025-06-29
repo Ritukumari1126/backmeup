@@ -16,7 +16,7 @@ export default function Requests() {
       if (!user) return;
       try {
         const res = await axios.get(
-          `http://localhost:5000/api/requests/${user.uid}`
+          `https://backmeup-complete-1.onrender.com/api/requests/${user.uid}`
         );
         setRequests(res.data);         // array of user objects
       } catch (err) {
@@ -33,13 +33,13 @@ export default function Requests() {
   const acceptRequest = async (fromUid) => {
     setLoadingAction(true);
     try {
-      await axios.post("http://localhost:5000/api/accept-partner", {
+      await axios.post("https://backmeup-complete-1.onrender.com/api/accept-partner", {
         fromUid,
         toUid: user.uid
       });
       toast.success("🎉 You are now matched!");
       const { data: newUser } = await axios.get(
-        `http://localhost:5000/api/user/${user.uid}`
+        `https://backmeup-complete-1.onrender.com/api/user/${user.uid}`
       );
       setUserData(newUser);
       navigate("/circle");
@@ -54,7 +54,7 @@ export default function Requests() {
   const declineRequest = async (fromUid) => {
     setLoadingAction(true);
     try {
-      await axios.post("http://localhost:5000/api/decline-request", {
+      await axios.post("https://backmeup-complete-1.onrender.com/api/decline-request", {
         toUid: user.uid,
         fromUid
       });
